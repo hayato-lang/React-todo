@@ -14,6 +14,10 @@ export const App = () => {
 
   const onChageText = (event) => setTodoText(event.target.value);
 
+  const onClickDelete = () => {
+    alert("削除");
+  };
+
   const onClickAdd = () => {
     if (todoText === "") return;
     const newTodos = [...incompleteTodos, todoText];
@@ -39,7 +43,7 @@ export const App = () => {
               <div key={todo} className="list-row">
                 <li>{todo}</li>
                 <button>完了</button>
-                <button>削除</button>
+                <button onClick={onClickDelete}>削除</button>
               </div>
             );
           })}
