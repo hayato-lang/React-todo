@@ -14,17 +14,26 @@ export const App = () => {
 
   const onChageText = (event) => setTodoText(event.target.value);
 
+  const onClickAdd = () => {
+    if (todoText === "") return;
+    const newTodos = [...incompleteTodos, todoText];
+    setIncompleteTodos(newTodos);
+    setTodoText("");
+  };
+
   const onClickDelete = (index) => {
     const newTodos = [...incompleteTodos];
     newTodos.splice(index, 1);
     setIncompleteTodos(newTodos);
   };
 
-  const onClickAdd = () => {
-    if (todoText === "") return;
-    const newTodos = [...incompleteTodos, todoText];
-    setIncompleteTodos(newTodos);
-    setTodoText("");
+  const onClickComplete = (index) => {
+    const newIncompleteTodos = [...incompleteTodos];
+    newIncompleteTodos.splice(index, 1);
+
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
+    setIncompleteTodos(newIncompleteTodos);
+    setCompleteTodos(newCompleteTodos);
   };
   return (
     <>
@@ -44,7 +53,7 @@ export const App = () => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>完了</button>
+                <button onClick={() => onClickComplete(index)}>完了</button>
                 <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
