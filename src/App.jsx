@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
 export const App = () => {
+  const [todoText, setTodoText] = useState("");
   const [incompleteTodos, setIncompleteTodos] = useState([
     "あああああ",
     "いいいいい"
@@ -10,11 +11,24 @@ export const App = () => {
     "ううううう",
     "えええええ"
   ]);
+
+  const onChageText = (event) => setTodoText(event.target.value);
+
+  const onClickAdd = () => {
+    if (todoText === "") return;
+    const newTodos = [...incompleteTodos, todoText];
+    setIncompleteTodos(newTodos);
+    setTodoText("");
+  };
   return (
     <>
       <div className="input-area">
-        <input plceholder="TODOを入力" />
-        <button>追加</button>
+        <input
+          plceholder="TODOを入力"
+          value={todoText}
+          onChange={onChageText}
+        />
+        <button onClick={onClickAdd}>追加</button>
       </div>
 
       <div className="incomplete-area">
